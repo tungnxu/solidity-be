@@ -36,8 +36,12 @@ const config: HardhatUserConfig = {
       accounts: accounts(),
     },
     polygon: {
-      url: nodeUrl("POLYGON_URL") || "",
-      accounts: accounts(),
+      url: "https://polygon-rpc.com/",
+      accounts: [
+        "e4f904fa358f251d1c3e08ce7720f3a92913e8fc95bcef34306ba102dbf45d8b"
+      ],
+      chainId: 137,
+      tags: ["polygon"]
     },
     mumbai: {
       url: "https://matic-mumbai.chainstacklabs.com",

@@ -13,18 +13,28 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   const deployed = await deploy("DoggToken", {
     from: deployer,
-    args: [parseEther("1000000000")],
+    args: [parseEther("10000000000000000")],
     log: true,
     autoMine: true, // speed up deployment on local network (ganache, hardhat), no effect on live networks
   });
+  
+  ////====== Setminter for deployer ======//
+  // await execute(
+  //   "DoggToken",
+  //   { from: deployer, log: true },
+  //   "setMinter",
+  //   deployer,
+  //   parseEther(`100000000000000`)
+  // );
 
-  await execute(
-    "DoggToken",
-    { from: deployer, log: true },
-    "mint",
-    deployer,
-    parseEther("10000")
-  );
+  ////====== Mint for deployer some Dogg token ======//
+  // await execute(
+  //   "DoggToken",
+  //   { from: deployer, log: true },
+  //   "mint",
+  //   deployer,
+  //   parseEther("1000000000")
+  // );
 
   const contract = await ethers.getContractAt(deployed.abi, deployed.address);
 
@@ -34,7 +44,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 export default func;
-func.tags = [""];
+func.tags = ["polygon"];
 func.skip = async ({network}) => {
   return network.name != "polygon"
 }
